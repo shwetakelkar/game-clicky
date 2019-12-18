@@ -19,18 +19,21 @@ class App extends React.Component{
 
         if(idArray.indexOf(id)=== -1){
             idArray.push(id);
-            this.setState({content: "You guessed correctly!",score: this.state.score + 1})
+            if(this.state.score === 11)// this condition checks for the win case
+                this.setState({content: "You Win!",score: this.state.score + 1})
+            else  
+                this.setState({content: "You guessed correctly!",score: this.state.score + 1})
             if(this.state.score>=this.state.topScore){
-                this.setState({ topScore: this.state.score +1})
+                this.setState({ topScore: this.state.score +1})//this condition increment top score value only if the current score is greate than the previous top score
             }
         }
         else{
-            idArray =[]
+            idArray =[] //refresh the id array to start the game with score 0
             this.setState({content: "You guessed incorrectly!" , score:0})
         }
         const images = shuffle(this.state.images)
         this.setState({images});
-      };
+    };
        
     render(){
         return(
